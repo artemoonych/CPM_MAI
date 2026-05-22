@@ -29,17 +29,10 @@ import networkx as nx
 
 @dataclass(frozen=True)
 class Activity:
-    """Описание одной работы проекта."""
-
     code: str
     name: str
     duration: int
     predecessors: List[str]
-
-
-# ------------------------------------------------------------
-# 1. Загрузка исходных данных из отдельного файла
-# ------------------------------------------------------------
 
 def load_activities_from_json(file_path: str | Path) -> Dict[str, Activity]:
     """Загружает список работ проекта из JSON-файла."""
@@ -88,11 +81,6 @@ def load_activities_from_json(file_path: str | Path) -> Dict[str, Activity]:
 
     return activities
 
-
-# ------------------------------------------------------------
-# 2. Построение и проверка графа
-# ------------------------------------------------------------
-
 def build_graph(activities: Dict[str, Activity]) -> nx.DiGraph:
     """Создаёт ориентированный граф зависимостей работ."""
 
@@ -121,11 +109,6 @@ def build_graph(activities: Dict[str, Activity]) -> nx.DiGraph:
 
     return graph
 
-
-# ------------------------------------------------------------
-# 3. Расчёт CPM
-# ------------------------------------------------------------
-
 def calculate_cpm(
     graph: nx.DiGraph,
     activities: Dict[str, Activity],
@@ -153,7 +136,6 @@ def calculate_cpm(
     late_start: Dict[str, int] = {}
     late_finish: Dict[str, int] = {}
 
-    # Обратный проход: расчёт поздних сроков
     for code in reversed(topological_order):
         successors = list(graph.successors(code))
 
@@ -187,11 +169,6 @@ def calculate_cpm(
 
     return result, project_duration
 
-
-# ------------------------------------------------------------
-# 4. Поиск критических путей
-# ------------------------------------------------------------
-
 def find_critical_paths(
     graph: nx.DiGraph,
     cpm_result: List[dict],
@@ -218,13 +195,8 @@ def find_critical_paths(
 
     return critical_paths
 
-
-# ------------------------------------------------------------
-# 5. Вывод таблицы в консоль
-# ------------------------------------------------------------
-
 def print_cpm_table(cpm_result: List[dict]) -> None:
-    """Печатает таблицу расчётов CPM без использования pandas."""
+    """Печатает таблицу расчётов CPM"""
 
     headers = [
         "Код",
@@ -274,11 +246,6 @@ def print_cpm_table(cpm_result: List[dict]) -> None:
 
     for row in rows:
         print(format_row(row))
-
-
-# ------------------------------------------------------------
-# 6. Визуализация сетевого графика
-# ------------------------------------------------------------
 
 def draw_network_graph(
     graph: nx.DiGraph,
@@ -353,11 +320,6 @@ def draw_network_graph(
     plt.savefig(output_path, dpi=300)
     plt.show()
 
-
-# ------------------------------------------------------------
-# 7. Визуализация графика работ во времени
-# ------------------------------------------------------------
-
 def draw_gantt_chart(
     cpm_result: List[dict],
     output_path: str | Path = "gantt_chart.png",
@@ -398,11 +360,6 @@ def draw_gantt_chart(
     plt.tight_layout()
     plt.savefig(output_path, dpi=300)
     plt.show()
-
-
-# ------------------------------------------------------------
-# 8. Основной сценарий выполнения программы
-# ------------------------------------------------------------
 
 def main() -> None:
     data_file = "activities.json"
