@@ -1,0 +1,86 @@
+{
+  "project": {
+    "title": "Цифровизация образовательного учреждения",
+    "description": "Проект внедрения LMS, электронного журнала, цифровых материалов и сопутствующей ИТ-инфраструктуры"
+  },
+  "activities": [
+    {
+      "code": "A",
+      "name": "Аудит ИТ-инфраструктуры",
+      "duration": 5,
+      "predecessors": []
+    },
+    {
+      "code": "B",
+      "name": "Сбор требований от администрации и преподавателей",
+      "duration": 4,
+      "predecessors": []
+    },
+    {
+      "code": "C",
+      "name": "Разработка технического задания",
+      "duration": 3,
+      "predecessors": ["A", "B"]
+    },
+    {
+      "code": "D",
+      "name": "Выбор LMS-платформы",
+      "duration": 4,
+      "predecessors": ["B"]
+    },
+    {
+      "code": "E",
+      "name": "Закупка оборудования и лицензий",
+      "duration": 7,
+      "predecessors": ["C"]
+    },
+    {
+      "code": "F",
+      "name": "Настройка серверов или облачной среды",
+      "duration": 5,
+      "predecessors": ["D", "E"]
+    },
+    {
+      "code": "G",
+      "name": "Оцифровка учебных материалов",
+      "duration": 10,
+      "predecessors": ["C"]
+    },
+    {
+      "code": "H",
+      "name": "Обучение преподавателей",
+      "duration": 6,
+      "predecessors": ["D"]
+    },
+    {
+      "code": "I",
+      "name": "Интеграция LMS с электронным журналом и сайтом",
+      "duration": 6,
+      "predecessors": ["F", "G"]
+    },
+    {
+      "code": "J",
+      "name": "Пилотное тестирование",
+      "duration": 5,
+      "predecessors": ["H", "I"]
+    },
+    {
+      "code": "K",
+      "name": "Исправление ошибок и доработка",
+      "duration": 4,
+      "predecessors": ["J"]
+    },
+    {
+      "code": "L",
+      "name": "Запуск системы",
+      "duration": 2,
+      "predecessors": ["K"]
+    },
+    {
+      "code": "M",
+      "name": "Сопровождение после запуска",
+      "duration": 5,
+      "predecessors": ["L"]
+    }
+  ]
+}
